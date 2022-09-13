@@ -91,14 +91,14 @@
 // void Poisk(int[,] array, int a, int b)
 // {
 
-    
+
 
 //     if (a <= array.GetLength(0) && b <= array.GetLength(1))
 
-//         Console.WriteLine("элемент с указанным индексом существует в заданном массиве ");
+//         Console.WriteLine("элемент array,[a, b]  существует в заданном массиве ");
 
 //     else
-//         Console.WriteLine("элемент с указанным индексом НЕ существует в заданном массиве ");
+//         Console.WriteLine("элемент array,[a, b] НЕ существует в заданном массиве ");
 
 // }
 
@@ -122,7 +122,7 @@
 
 
 
-// Задача 52. Задайте двумерный массив из целых чисел. Найдите среднее арифметическое элементов в каждом столбце.
+// // Задача 52. Задайте двумерный массив из целых чисел. Найдите среднее арифметическое элементов в каждом столбце.
 
 // Например, задан массив:
 // 1 4 7 2
@@ -130,69 +130,53 @@
 // 8 4 2 4
 // Среднее арифметическое каждого столбца: 4,6; 5,6; 3,6; 3.
 
-int[,] Create2dArray()
+int[,] CreatNewArray()
 {
-    Console.WriteLine("Введите количество строк: ");
+    Console.WriteLine("Enter the number of rows: ");
     int m = Convert.ToInt32(Console.ReadLine());
-    Console.WriteLine("Введите количество столбцов: ");
+    Console.WriteLine("Enter the number of columns: ");
     int n = Convert.ToInt32(Console.ReadLine());
-    Console.WriteLine("Введите минимальное значение в массиве: ");
-    int minValue = new Random().Next(1, 10);
-    Console.WriteLine("Введите максимальное значение в массиве: ");
-    int maxValue = new Random().Next(1, 10);
-
-    int[,] newArray = new int[m, n];
+    System.Console.WriteLine();
+    int[,] array = new int[m, n];
 
     for (int i = 0; i < m; i++)
     {
         for (int j = 0; j < n; j++)
         {
-            newArray[i, j] = i + j;
+            array[i, j] = new Random().Next(1, 9);
         }
     }
-    return newArray;
+    return array;
 }
 
-void Show2dArray(int[,] array)
+void ShowArray(int[,] array)
 {
     for (int i = 0; i < array.GetLength(0); i++)
     {
         for (int j = 0; j < array.GetLength(1); j++)
-            Console.Write(array[i, j] + "  ");
-        Console.WriteLine();
+
+            Console.Write(array[i, j] + "  |  ");
+        System.Console.WriteLine();
     }
-    Console.WriteLine();
+    System.Console.WriteLine();
 }
 
 
-void Number(int[,] array)
+void Average(int[,] array)
 {
-    int sum = 0;
-    int i = 0;
-
-    int[,] newarrayB = Create2dArray();
-
-        for (int i = 0; i < array.GetLength(0); i++)
+    for (int j = 0; j < array.GetLength(1); j++)
     {
-        for (int j = 0; j < array.GetLength(1); j++)
+        double avr = 0;
+        for (int i = 0; i < array.GetLength(0); i++)
+            avr = avr + array[i, j];
 
-
-        sum = newarrayB [i,j] + newarrayB [i,j+1] + newarrayB [i, j+2] ... newarrayB [i,j+n]
-
-        Console.WriteLine("элемент с указанным индексом существует в заданном массиве ");
-
-     else
-        Console.WriteLine("элемент с указанным индексом НЕ существует в заданном массиве ");
-
-
+        avr = (avr / array.GetLength(0));
+        avr = Math.Round(avr, 2);
+        System.Console.WriteLine($"Arithmetic mean of column number {j + 1} = {avr}");
+    }
 }
 
-Console.WriteLine("Введите первый индекс элемента: ");
-int a = Convert.ToInt32(Console.ReadLine());
-Console.WriteLine("Введите второй индекс элемента: ");
-int b = Convert.ToInt32(Console.ReadLine());
+int[,] newArr = CreatNewArray();
+ShowArray(newArr);
 
-
-int[,] newArray = Create2dArray();
-Show2dArray(newArray);
-
+Average(newArr);
